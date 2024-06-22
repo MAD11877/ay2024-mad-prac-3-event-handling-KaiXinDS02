@@ -1,24 +1,31 @@
 package sg.edu.np.mad.madpractical2;
 
-import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.messageButton), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        User user = new User("John Doe", "Android Developer", 1, false);
+
+        TextView nameTextView = findViewById(R.id.nameTextView);
+        TextView descriptionTextView = findViewById(R.id.descriptionTextView);
+        Button followButton = findViewById(R.id.followButton);
+
+        nameTextView.setText(user.name);
+        descriptionTextView.setText(user.description);
+
+        followButton.setText(user.followed ? "Unfollow" : "Follow");
+
+        followButton.setOnClickListener(view -> {
+            user.followed = !user.followed;
+            followButton.setText(user.followed ? "Unfollow" : "Follow");
         });
     }
 }
