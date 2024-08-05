@@ -19,22 +19,17 @@ public class ListActivity extends AppCompatActivity {
         ImageView centerImageView = findViewById(R.id.centerImageView);
         centerImageView.setOnClickListener(view -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(ListActivity.this);
-            builder.setMessage("MADness")
+            builder.setTitle("Profile")
+                    .setMessage("MADness")
                     .setCancelable(false)
-                    .setPositiveButton("View", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Random random = new Random();
-                            int randomNumber = random.nextInt(100000);
-                            Intent intent = new Intent(ListActivity.this, MainActivity.class);
-                            intent.putExtra("randomNumber", randomNumber);
-                            startActivity(intent);
-                        }
+                    .setPositiveButton("View", (dialog, id) -> {
+                        Random random = new Random();
+                        int randomNumber = random.nextInt(100000);
+                        Intent intent = new Intent(ListActivity.this, MainActivity.class);
+                        intent.putExtra("randomNumber", randomNumber);
+                        startActivity(intent);
                     })
-                    .setNegativeButton("Close", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
+                    .setNegativeButton("Close", (dialog, id) -> dialog.cancel());
             AlertDialog alert = builder.create();
             alert.show();
         });

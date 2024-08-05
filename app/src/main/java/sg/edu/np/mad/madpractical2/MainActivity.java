@@ -14,20 +14,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User user = new User("John Doe", "Android Developer", 1, false);
+        User user = new User("MAD", "MAD Developer", 1, false);
 
         TextView nameTextView = findViewById(R.id.nameTextView);
         TextView descriptionTextView = findViewById(R.id.descriptionTextView);
         Button followButton = findViewById(R.id.followButton);
-        Button messageButton = findViewById(R.id.messageButton); // Add this line
+        Button messageButton = findViewById(R.id.messageButton);
 
-        // Check if the intent has the extra data
         Intent intent = getIntent();
         int randomNumber = intent.getIntExtra("randomNumber", -1);
 
-        // Update the nameTextView with the random number if it exists
         if (randomNumber != -1) {
-            nameTextView.setText(user.name + " (" + randomNumber + ")");
+            nameTextView.setText(user.name + " " + randomNumber);
         } else {
             nameTextView.setText(user.name);
         }
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, user.followed ? "Followed" : "Unfollowed", Toast.LENGTH_SHORT).show();
         });
 
-        messageButton.setOnClickListener(view -> { // Add this block
+        messageButton.setOnClickListener(view -> {
             Intent messageIntent = new Intent(MainActivity.this, MessageGroup.class);
             startActivity(messageIntent);
         });
